@@ -57,6 +57,12 @@ class Jazzicon {
     MersenneTwister19937 generator = MersenneTwister19937();
     generator.init_genrand(seed);
 
+    if (colorList != null && colorList.length < shapeCount) {
+      final List<Color> greys =
+          List.generate(shapeCount - colorList.length, (index) => Colors.grey);
+      colorList.addAll(greys);
+    }
+
     List<Color> remainingColors = _hueShift(colorList ?? colors, generator);
 
     Color background = _genColor(remainingColors, generator);
